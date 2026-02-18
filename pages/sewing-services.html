@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Sewing Services | Eliza Couture</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        /* Sewing Services Page Specific Styles */
+        .service-card {
+            background: var(--color-white);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+        .service-image {
+            height: 280px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .service-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            opacity: 0;
+            transition: var(--transition);
+            display: flex;
+            align-items: flex-end;
+            padding: 20px;
+        }
+        .service-card:hover .service-overlay {
+            opacity: 1;
+        }
+        .service-overlay span {
+            color: var(--color-white);
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-bottom: 2px solid var(--color-gold);
+            padding-bottom: 5px;
+        }
+        .service-content {
+            padding: 30px 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .service-content h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: var(--color-black);
+        }
+        .service-content p {
+            color: var(--color-gray);
+            margin-bottom: 25px;
+            line-height: 1.7;
+            flex-grow: 1;
+        }
+        .service-price {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--color-gold);
+            margin-bottom: 20px;
+        }
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+        }
+        .step {
+            text-align: center;
+            position: relative;
+        }
+        .step:not(:last-child):after {
+            content: '→';
+            position: absolute;
+            right: -20px;
+            top: 30px;
+            font-size: 30px;
+            color: var(--color-gold);
+            font-weight: 300;
+        }
+        .step-number {
+            width: 70px;
+            height: 70px;
+            background: var(--color-black);
+            color: var(--color-white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: 600;
+            margin: 0 auto 25px;
+            border: 3px solid var(--color-gold);
+        }
+        .step h4 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: var(--color-black);
+        }
+        .step p {
+            color: var(--color-gray);
+        }
+        @media (max-width: 768px) {
+            .process-steps {
+                grid-template-columns: 1fr;
+            }
+            .step:not(:last-child):after {
+                content: '↓';
+                right: 0;
+                top: auto;
+                bottom: -20px;
+                transform: rotate(90deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/08132030245?text=Hello%20Eliza%20Couture,%20I%27m%20interested%20in%20your%20sewing%20services." class="whatsapp-float" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Sticky Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <h1>ELIZA<span>COUTURE</span></h1>
+            </div>
+            <button class="nav-toggle" aria-label="open navigation">
+                <span class="hamburger"></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../pages/about.html">About</a></li>
+                <li><a href="../pages/sewing-services.html" class="active">Sewing</a></li>
+                <li><a href="../pages/fashion-school.html">Academy</a></li>
+                <li><a href="../pages/gallery.html">Gallery</a></li>
+                <li><a href="../pages/booking.html">Book</a></li>
+                <li><a href="../pages/contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="container">
+            <h1>Bespoke Sewing Services</h1>
+            <p class="breadcrumb">Custom garments tailored to perfection</p>
+        </div>
+    </header>
+
+    <!-- Services Grid Section -->
+    <section class="services-grid section-padding">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">What We Offer</span>
+                <h2>Our Signature Services</h2>
+                <p>Each piece is meticulously crafted with premium fabrics and precision fitting</p>
+            </div>
+            
+            <div class="cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));">
+                <!-- Bridal Wear -->
+                <div class="service-card">
+                    <div class="service-image" style="background-image: url('../images/bridal.jpg');">
+                        <div class="service-overlay">
+                            <span>Bridal Collection</span>
+                        </div>
+                    </div>
+                    <div class="service-content">
+                        <h3>Bridal Wears</h3>
+                        <p>Your dream dress awaits. From classic ball gowns to modern minimalist silhouettes. Each bridal piece is a one-of-a-kind creation with 3+ fittings included.</p>
+                        <div class="service-price">From ₦350,000</div>
+                        <a href="booking.html?service=bridal&type=fitting" class="btn btn-primary" style="width: 100%; text-align: center;">Book a Fitting</a>
+                    </div>
+                </div>
+
+                <!-- Asoebi Wear -->
+                <div class="service-card">
+                    <div class="service-image" style="background-image: url('../images/asoebi.jpg');">
+                        <div class="service-overlay">
+                            <span>Asoebi Special</span>
+                        </div>
+                    </div>
+                    <div class="service-content">
+                        <h3>Asoebi Wears</h3>
+                        <p>Stand out at every occasion. We specialize in elaborate Asoebi styles, gele styling, and family coordinated looks. Bulk orders welcome.</p>
+                        <div class="service-price">From ₦85,000</div>
+                        <a href="booking.html?service=asoebi&type=fitting" class="btn btn-primary" style="width: 100%; text-align: center;">Book a Fitting</a>
+                    </div>
+                </div>
+
+                <!-- Native Wear -->
+                <div class="service-card">
+                    <div class="service-image" style="background-image: url('../images/native.jpg');">
+                        <div class="service-overlay">
+                            <span>Native Elegance</span>
+                        </div>
+                    </div>
+                    <div class="service-content">
+                        <h3>Native Wears</h3>
+                        <p>Celebrate heritage with modern sophistication. Agbada, iro & buba, kaftans, and contemporary native fusion pieces for men and women.</p>
+                        <div class="service-price">From ₦65,000</div>
+                        <a href="booking.html?service=native&type=fitting" class="btn btn-primary" style="width: 100%; text-align: center;">Book a Fitting</a>
+                    </div>
+                </div>
+
+                <!-- Corporate Wear -->
+                <div class="service-card">
+                    <div class="service-image" style="background-image: url('../images/cop.jpg');">
+                        <div class="service-overlay">
+                            <span>Corporate</span>
+                        </div>
+                    </div>
+                    <div class="service-content">
+                        <h3>Corporate Wears</h3>
+                        <p>Power dressing redefined. Bespoke suits, executive dresses, and corporate uniforms that command respect and confidence.</p>
+                        <div class="service-price">From ₦95,000</div>
+                        <a href="booking.html?service=corporate&type=fitting" class="btn btn-primary" style="width: 100%; text-align: center;">Book a Fitting</a>
+                    </div>
+                </div>
+
+                <!-- Alterations -->
+                <div class="service-card">
+                    <div class="service-image" style="background-image: url('../assets/images/alterations-service.jpg');">
+                        <div class="service-overlay">
+                            <span>Alterations</span>
+                        </div>
+                    </div>
+                    <div class="service-content">
+                        <h3>Alterations & Repairs</h3>
+                        <p>Expert alterations for your cherished garments. Hemming, taking in/out, zipper replacement, and complete restyling.</p>
+                        <div class="service-price">From ₦15,000</div>
+                        <a href="booking.html?service=alterations&type=fitting" class="btn btn-primary" style="width: 100%; text-align: center;">Book a Fitting</a>
+                    </div>
+                </div>
+
+                <!-- Bespoke Commission -->
+                <div class="service-card">
+                    <div class="service-image" style="background-image: url('../assets/images/bespoke-service.jpg');">
+                        <div class="service-overlay">
+                            <span>Bespoke</span>
+                        </div>
+                    </div>
+                    <div class="service-content">
+                        <h3>Bespoke Commission</h3>
+                        <p>Have something unique in mind? We bring your vision to life with premium fabric sourcing and couture techniques.</p>
+                        <div class="service-price">Custom Quote</div>
+                        <a href="booking.html?service=bespoke&type=fitting" class="btn btn-primary" style="width: 100%; text-align: center;">Book Consultation</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Order Section -->
+    <section class="how-to-order section-padding" style="background-color: var(--color-offwhite);">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Simple Process</span>
+                <h2>How to Order</h2>
+                <p>Your bespoke garment journey in four easy steps</p>
+            </div>
+
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">01</div>
+                    <h4>Choose a Style</h4>
+                    <p>Browse our gallery or bring inspiration photos. We'll help you refine your vision.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">02</div>
+                    <h4>Book Fitting</h4>
+                    <p>Schedule your appointment. We take 20+ precise measurements and discuss fabric options.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">03</div>
+                    <h4>Pay Deposit</h4>
+                    <p>50% deposit secures your slot. Balance due before pickup.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">04</div>
+                    <h4>Delivery</h4>
+                    <p>Final fitting and adjustments. Take your perfect garment home.</p>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 60px;">
+                <a href="booking.html" class="btn btn-primary" style="padding: 16px 48px;">Start Your Order</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fabric Partners Section -->
+    <section class="fabric-partners section-padding">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Premium Materials</span>
+                <h2>Our Fabric Partners</h2>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 40px; align-items: center;">
+                <div style="text-align: center;"><i class="fas fa-tshirt" style="font-size: 40px; color: var(--color-gold);"></i><p style="margin-top: 15px; font-weight: 600;">Italian Wool</p></div>
+                <div style="text-align: center;"><i class="fas fa-feather-alt" style="font-size: 40px; color: var(--color-gold);"></i><p style="margin-top: 15px; font-weight: 600;">French Lace</p></div>
+                <div style="text-align: center;"><i class="fas fa-leaf" style="font-size: 40px; color: var(--color-gold);"></i><p style="margin-top: 15px; font-weight: 600;">African Wax</p></div>
+                <div style="text-align: center;"><i class="fas fa-gem" style="font-size: 40px; color: var(--color-gold);"></i><p style="margin-top: 15px; font-weight: 600;">Silk & Satin</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-info">
+                    <h3>ELIZA<span>COUTURE</span></h3>
+                    <p>Bespoke fashion & fashion academy. Creating elegance, one stitch at a time.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="sewing-services.html">Sewing Services</a></li>
+                        <li><a href="fashion-school.html">Fashion School</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="booking.html">Book Now</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> 15 Elegant Street, Lagos</p>
+                    <p><i class="fas fa-phone"></i> +234 800 000 0000</p>
+                    <p><i class="fas fa-envelope"></i> info@elizacouture.ng</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Eliza Couture. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

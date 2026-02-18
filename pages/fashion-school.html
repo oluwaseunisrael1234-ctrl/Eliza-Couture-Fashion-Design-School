@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Fashion School | Eliza Couture Academy</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        /* Fashion School Specific Styles */
+        .course-card {
+            background: var(--color-white);
+            border-bottom: 3px solid transparent;
+            transition: var(--transition);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .course-card:hover {
+            border-bottom-color: var(--color-gold);
+            box-shadow: var(--shadow-hover);
+        }
+        .course-header {
+            background: var(--color-black);
+            color: var(--color-white);
+            padding: 30px 25px;
+            position: relative;
+        }
+        .course-header h3 {
+            font-size: 26px;
+            margin-bottom: 10px;
+            color: var(--color-white);
+        }
+        .course-level {
+            display: inline-block;
+            background: var(--color-gold);
+            color: var(--color-black);
+            padding: 5px 15px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .course-body {
+            padding: 30px 25px;
+            flex-grow: 1;
+        }
+        .course-duration {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--color-gold);
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        .course-features {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        .course-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .course-features li i {
+            color: var(--color-gold);
+            font-size: 14px;
+        }
+        .course-price {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--color-black);
+            margin-bottom: 25px;
+        }
+        .course-price small {
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--color-gray);
+        }
+        .learning-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .learning-item {
+            text-align: center;
+            padding: 30px;
+            background: var(--color-white);
+            box-shadow: var(--shadow);
+        }
+        .learning-item i {
+            font-size: 40px;
+            color: var(--color-gold);
+            margin-bottom: 20px;
+        }
+        .student-work-preview {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        .student-work-item {
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .student-work-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(198, 164, 63, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: var(--transition);
+        }
+        .student-work-item:hover .student-work-overlay {
+            opacity: 1;
+        }
+        .student-work-overlay span {
+            color: var(--color-white);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        @media (max-width: 768px) {
+            .student-work-preview {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 480px) {
+            .student-work-preview {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/08132030245?text=Hello%20Eliza%20Couture,%20I%27m%20interested%20in%20your%20fashion%20school." class="whatsapp-float" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Sticky Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <h1>ELIZA<span>COUTURE</span></h1>
+            </div>
+            <button class="nav-toggle" aria-label="open navigation">
+                <span class="hamburger"></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../pages/about.html">About</a></li>
+                <li><a href="../pages/sewing-services.html">Sewing</a></li>
+                <li><a href="../pages/fashion-school.html" class="active">Academy</a></li>
+                <li><a href="../pages/gallery.html">Gallery</a></li>
+                <li><a href="../pages/booking.html">Book</a></li>
+                <li><a href="../pages/contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="container">
+            <h1>Eliza Couture Fashion Academy</h1>
+            <p class="breadcrumb">Where Passion Becomes Profession</p>
+        </div>
+    </header>
+
+    <!-- Academy Intro -->
+    <section class="academy-intro section-padding">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-text">
+                    <span class="section-subtitle">Learn from the Master</span>
+                    <h2>Transform Your Future in Fashion</h2>
+                    <p class="lead">Limited class sizes. Direct mentorship from Eliza Adebayo.</p>
+                    <p>Our academy isn't just about learning to sew—it's about understanding the business, the artistry, and the precision that defines luxury fashion. With state-of-the-art equipment and industry-connected curriculum, our graduates are ready to launch their own brands or work with top fashion houses.</p>
+                    <div style="display: flex; gap: 20px; margin-top: 30px;">
+                        <div>
+                            <h3 style="font-size: 36px; color: var(--color-gold);">200+</h3>
+                            <p>Graduates</p>
+                        </div>
+                        <div>
+                            <h3 style="font-size: 36px; color: var(--color-gold);">15+</h3>
+                            <p>Industry Partners</p>
+                        </div>
+                        <div>
+                            <h3 style="font-size: 36px; color: var(--color-gold);">90%</h3>
+                            <p>Employment Rate</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <div class="image-frame" style="background-image: url('..//images/hero.jpeg');"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section class="courses-section section-padding" style="background-color: var(--color-offwhite);">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Our Programs</span>
+                <h2>Fashion Education for Every Level</h2>
+                <p>Comprehensive curriculum designed by industry professionals</p>
+            </div>
+
+            <div class="cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                <!-- Beginner Course -->
+                <div class="course-card">
+                    <div class="course-header">
+                        <span class="course-level">Beginner</span>
+                        <h3>Foundation in Fashion</h3>
+                    </div>
+                    <div class="course-body">
+                        <div class="course-duration">
+                            <i class="far fa-calendar-alt"></i>
+                            <span>8 Weeks | Weekends Available</span>
+                        </div>
+                        <ul class="course-features">
+                            <li><i class="fas fa-check"></i> Sewing machine mastery</li>
+                            <li><i class="fas fa-check"></i> Basic pattern drafting</li>
+                            <li><i class="fas fa-check"></i> Fabric identification</li>
+                            <li><i class="fas fa-check"></i> Complete a skirt and top</li>
+                            <li><i class="fas fa-check"></i> Introduction to fashion business</li>
+                        </ul>
+                        <div class="course-price">₦185,000 <small>Full course</small></div>
+                        <a href="booking.html?course=beginner&type=training" class="btn btn-primary" style="width: 100%;">Enroll Now</a>
+                    </div>
+                </div>
+
+                <!-- Intermediate Course -->
+                <div class="course-card">
+                    <div class="course-header">
+                        <span class="course-level">Intermediate</span>
+                        <h3>Design & Construction</h3>
+                    </div>
+                    <div class="course-body">
+                        <div class="course-duration">
+                            <i class="far fa-calendar-alt"></i>
+                            <span>12 Weeks | Intensive</span>
+                        </div>
+                        <ul class="course-features">
+                            <li><i class="fas fa-check"></i> Advanced pattern drafting</li>
+                            <li><i class="fas fa-check"></i> Draping techniques</li>
+                            <li><i class="fas fa-check"></i> Lingerie & evening wear</li>
+                            <li><i class="fas fa-check"></i> Fitting adjustments</li>
+                            <li><i class="fas fa-check"></i> Portfolio development</li>
+                        </ul>
+                        <div class="course-price">₦285,000 <small>Includes materials</small></div>
+                        <a href="booking.html?course=intermediate&type=training" class="btn btn-primary" style="width: 100%;">Enroll Now</a>
+                    </div>
+                </div>
+
+                <!-- Advanced Course -->
+                <div class="course-card">
+                    <div class="course-header">
+                        <span class="course-level">Advanced</span>
+                        <h3>Couture Techniques</h3>
+                    </div>
+                    <div class="course-body">
+                        <div class="course-duration">
+                            <i class="far fa-calendar-alt"></i>
+                            <span>16 Weeks | Masterclass</span>
+                        </div>
+                        <ul class="course-features">
+                            <li><i class="fas fa-check"></i> Haute couture sewing</li>
+                            <li><i class="fas fa-check"></i> Bridal & evening gowns</li>
+                            <li><i class="fas fa-check"></i> Tailoring & suiting</li>
+                            <li><i class="fas fa-check"></i> Collection development</li>
+                            <li><i class="fas fa-check"></i> Fashion show production</li>
+                        </ul>
+                        <div class="course-price">₦450,000 <small>Payment plans</small></div>
+                        <a href="booking.html?course=advanced&type=training" class="btn btn-primary" style="width: 100%;">Enroll Now</a>
+                    </div>
+                </div>
+
+                <!-- Pattern Drafting -->
+                <div class="course-card">
+                    <div class="course-header">
+                        <span class="course-level">Specialization</span>
+                        <h3>Pattern Drafting</h3>
+                    </div>
+                    <div class="course-body">
+                        <div class="course-duration">
+                            <i class="far fa-calendar-alt"></i>
+                            <span>6 Weeks | Technical</span>
+                        </div>
+                        <ul class="course-features">
+                            <li><i class="fas fa-check"></i> Block development</li>
+                            <li><i class="fas fa-check"></i> Grading techniques</li>
+                            <li><i class="fas fa-check"></i> Digital pattern making</li>
+                            <li><i class="fas fa-check"></i> Manipulation & draping</li>
+                            <li><i class="fas fa-check"></i> Industrial methods</li>
+                        </ul>
+                        <div class="course-price">₦195,000 <small>Certificate course</small></div>
+                        <a href="booking.html?course=pattern&type=training" class="btn btn-primary" style="width: 100%;">Enroll Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What Students Learn -->
+    <section class="learning-outcomes section-padding">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Curriculum</span>
+                <h2>What You'll Master</h2>
+            </div>
+            <div class="learning-grid">
+                <div class="learning-item">
+                    <i class="fas fa-ruler-combined"></i>
+                    <h4>Precision Pattern Making</h4>
+                    <p>From basic blocks to complex draping techniques</p>
+                </div>
+                <div class="learning-item">
+                    <i class="fas fa-cut"></i>
+                    <h4>Advanced Cutting</h4>
+                    <p>Fabric laying, grain lines, and zero-waste methods</p>
+                </div>
+                <div class="learning-item">
+                    <i class="fas fa-tshirt"></i>
+                    <h4>Construction Mastery</h4>
+                    <p>Professional finishes, bound buttonholes, tailoring</p>
+                </div>
+                <div class="learning-item">
+                    <i class="fas fa-palette"></i>
+                    <h4>Fashion Illustration</h4>
+                    <p>Technical flats and artistic rendering</p>
+                </div>
+                <div class="learning-item">
+                    <i class="fas fa-chart-line"></i>
+                    <h4>Fashion Business</h4>
+                    <p>Pricing, marketing, client management</p>
+                </div>
+                <div class="learning-item">
+                    <i class="fas fa-camera"></i>
+                    <h4>Portfolio & Branding</h4>
+                    <p>Professional photo shoots, lookbooks</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Student Work Gallery Preview -->
+    <section class="student-work section-padding" style="background-color: var(--color-black); color: var(--color-white);">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle" style="color: var(--color-gold);">Student Showcase</span>
+                <h2 style="color: var(--color-white);">Work from Our Graduates</h2>
+            </div>
+            <div class="student-work-preview">
+                <div class="student-work-item" style="background-image: url('../assets/images/student-1.jpg');">
+                    <div class="student-work-overlay"><span>Beginner Project</span></div>
+                </div>
+                <div class="student-work-item" style="background-image: url('../assets/images/student-2.jpg');">
+                    <div class="student-work-overlay"><span>Intermediate</span></div>
+                </div>
+                <div class="student-work-item" style="background-image: url('../assets/images/student-3.jpg');">
+                    <div class="student-work-overlay"><span>Advanced Collection</span></div>
+                </div>
+                <div class="student-work-item" style="background-image: url('../assets/images/student-4.jpg');">
+                    <div class="student-work-overlay"><span>Pattern Drafting</span></div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 50px;">
+                <a href="gallery.html?filter=student" class="btn btn-secondary">View Full Gallery</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enrollment CTA -->
+    <section class="enrollment-cta section-padding" style="background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('../assets/images/cta-academy.jpg'); background-size: cover; background-position: center; background-attachment: fixed;">
+        <div class="container" style="text-align: center; color: var(--color-white);">
+            <h2 style="font-size: 48px; margin-bottom: 20px; color: var(--color-white);">Ready to Start Your Fashion Career?</h2>
+            <p style="font-size: 20px; margin-bottom: 40px; max-width: 700px; margin-left: auto; margin-right: auto;">Next cohort begins April 15th. Limited seats available.</p>
+            <a href="booking.html" class="btn btn-primary" style="background-color: var(--color-gold); border-color: var(--color-gold); color: var(--color-black); padding: 16px 48px;">Apply Now</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-info">
+                    <h3>ELIZA<span>COUTURE</span></h3>
+                    <p>Bespoke fashion & fashion academy. Creating elegance, one stitch at a time.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../pages/sewing-services.html">Sewing Services</a></li>
+                        <li><a href="../pages/fashion-school.html">Fashion School</a></li>
+                        <li><a href="../pages/gallery.html">Gallery</a></li>
+                        <li><a href="../pages/booking.html">Book Now</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> 15 Ondo, Akure</p>
+                    <p><i class="fas fa-phone"></i> +234 813 203 0245</p>
+                    <p><i class="fas fa-envelope"></i> info@elizacouture.ng</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Eliza Couture. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

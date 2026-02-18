@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Gallery | Eliza Couture Portfolio</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        /* Gallery Page Specific Styles */
+        .gallery-header {
+            padding: 40px 0 20px;
+            text-align: center;
+        }
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 50px;
+        }
+        .filter-btn {
+            background: transparent;
+            border: 1px solid var(--color-gray-light);
+            padding: 12px 28px;
+            font-family: var(--font-sans);
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--color-black);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--color-black);
+            color: var(--color-white);
+            border-color: var(--color-black);
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            height: 400px;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.08);
+        }
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            padding: 30px 20px 20px;
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+        }
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+        .gallery-caption h4 {
+            color: var(--color-white);
+            margin-bottom: 5px;
+            font-size: 20px;
+        }
+        .gallery-caption p {
+            color: var(--color-gold);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Lightbox Styles */
+        .gallery-lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        .gallery-lightbox.active {
+            display: flex;
+        }
+        .lightbox-container {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+        }
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 90vh;
+            display: block;
+            border: 3px solid var(--color-gold);
+        }
+        .lightbox-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .lightbox-close:hover {
+            color: var(--color-gold);
+        }
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+        .lightbox-prev,
+        .lightbox-next {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .lightbox-prev:hover,
+        .lightbox-next:hover {
+            background: var(--color-gold);
+            color: var(--color-black);
+        }
+        
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+            .filter-container {
+                gap: 10px;
+            }
+            .filter-btn {
+                padding: 8px 16px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/08132030245?text=Hello%20Eliza%20Couture,%20I%20love%20your%20work%20from%20the%20gallery!" class="whatsapp-float" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Sticky Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <h1>ELIZA<span>COUTURE</span></h1>
+            </div>
+            <button class="nav-toggle" aria-label="open navigation">
+                <span class="hamburger"></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../pages/about.html">About</a></li>
+                <li><a href="../pages/sewing-services.html">Sewing</a></li>
+                <li><a href="../pages/fashion-school.html">Academy</a></li>
+                <li><a href="../pages/gallery.html" class="active">Gallery</a></li>
+                <li><a href="../pages/booking.html">Book</a></li>
+                <li><a href="../pages/contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="container">
+            <h1>Portfolio Gallery</h1>
+            <p class="breadcrumb">A collection of our finest work</p>
+        </div>
+    </header>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section section-padding">
+        <div class="container">
+            <div class="gallery-header">
+                <span class="section-subtitle">Our Creations</span>
+                <h2>From Atelier to Runway</h2>
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="filter-container">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="bridal">Bridal</button>
+                <button class="filter-btn" data-filter="native">Native</button>
+                <button class="filter-btn" data-filter="asoebi">Asoebi</button>
+                <button class="filter-btn" data-filter="corporate">Corporate</button>
+                <button class="filter-btn" data-filter="student">Student Work</button>
+            </div>
+
+            <!-- Gallery Grid -->
+            <div class="gallery-grid">
+                <!-- Bridal Items -->
+                <div class="gallery-item" data-category="bridal">
+                    <img src="../images/bridal.jpg" alt="Bridal Gown with Lace Detail">
+                    <div class="gallery-caption">
+                        <h4>Classic Lace Gown</h4>
+                        <p>Bridal Collection 2024</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="bridal">
+                    <img src="../images/bridal1.jpg" alt="Modern Minimalist Wedding Dress">
+                    <div class="gallery-caption">
+                        <h4>Minimalist Silk</h4>
+                        <p>Bridal Collection</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="bridal">
+                    <img src="../images/bridal.jpg" alt="Traditional White Wedding Gown">
+                    <div class="gallery-caption">
+                        <h4>Royal Train</h4>
+                        <p>Bespoke Commission</p>
+                    </div>
+                </div>
+
+                <!-- Native Items -->
+                <div class="gallery-item" data-category="native">
+                    <img src="../images/native1.jpg" alt="Agbada with Embroidery">
+                    <div class="gallery-caption">
+                        <h4>Ceremonial Agbada</h4>
+                        <p>Native Menswear</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="native">
+                    <img src="../images/native.jpg" alt="Iro and Buba with Gele">
+                    <div class="gallery-caption">
+                        <h4>Traditional Ensemble</h4>
+                        <p>Women's Native</p>
+                    </div>
+                </div>
+                
+
+                <!-- Asoebi Items -->
+                <div class="gallery-item" data-category="asoebi">
+                    <img src="../images/asoebi.jpg" alt="Family Asoebi Coordination">
+                    <div class="gallery-caption">
+                        <h4>Family Set</h4>
+                        <p>Asoebi Collection</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="asoebi">
+                    <img src="../images/asoebi1.jpg" alt="Lace Asoebi Styles">
+                    <div class="gallery-caption">
+                        <h4>Lace Elegance</h4>
+                        <p>Wedding Party</p>
+                    </div>
+                </div>
+                
+
+                <!-- Corporate Items -->
+                <div class="gallery-item" data-category="corporate">
+                    <img src="../images/cop.jpg" alt="Women's Power Suit">
+                    <div class="gallery-caption">
+                        <h4>Executive Suit</h4>
+                        <p>Corporate Womenswear</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="corporate">
+                    <img src="../images/cop1.jp" alt="Men's Bespoke Suit">
+                    <div class="gallery-caption">
+                        <h4>Tailored Suit</h4>
+                        <p>Menswear Collection</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="corporate">
+                    <img src="../images/cop2.jp" alt="Corporate Dress">
+                    <div class="gallery-caption">
+                        <h4>Sheath Dress</h4>
+                        <p>Office Chic</p>
+                    </div>
+                </div>
+
+                <!-- Student Work -->
+                <div class="gallery-item" data-category="student">
+                    <img src="../assets/images/gallery-student-1.jpg" alt="Student Design Project">
+                    <div class="gallery-caption">
+                        <h4>Graduate Collection</h4>
+                        <p>Advanced Student</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="student">
+                    <img src="../assets/images/gallery-student-2.jpg" alt="Pattern Making Project">
+                    <div class="gallery-caption">
+                        <h4>Pattern Drafting</h4>
+                        <p>Intermediate Class</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="gallery-lightbox">
+        <div class="lightbox-container">
+            <span class="lightbox-close"><i class="fas fa-times"></i></span>
+            <img src="" alt="Gallery Preview" class="lightbox-img">
+            <div class="lightbox-nav">
+                <span class="lightbox-prev"><i class="fas fa-chevron-left"></i></span>
+                <span class="lightbox-next"><i class="fas fa-chevron-right"></i></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-info">
+                    <h3>ELIZA<span>COUTURE</span></h3>
+                    <p>Bespoke fashion & fashion academy. Creating elegance, one stitch at a time.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../pages/sewing-services.html">Sewing Services</a></li>
+                        <li><a href="../pages/fashion-school.html">Fashion School</a></li>
+                        <li><a href="../pages/gallery.html">Gallery</a></li>
+                        <li><a href="../pages/booking.html">Book Now</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> 15 Ondo, Akure</p>
+                    <p><i class="fas fa-phone"></i> +234 813 203 0245</p>
+                    <p><i class="fas fa-envelope"></i> info@elizacouture.ng</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Eliza Couture. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/gallery.js"></script>
+</body>
+</html>
